@@ -1,0 +1,124 @@
+.index {
+  width: 100vw;
+  height: 100vh;
+}
+
+.home-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  border: 2px solid var(--text-color);
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.home-img img {
+  width: 100%;
+}
+
+.i-hero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.i-hero .row {
+  position: relative;
+  width: 60vw;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  height: 12vw;
+}
+
+.i-hero .row-1 {
+  justify-content: flex-start;
+}
+
+.i-hero .row-2 {
+  justify-content: flex-end;
+}
+
+.i-hero .row h1 {
+  position: relative;
+  top: 200px;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  font-size: 12vw;
+}
+
+.i-hero .row h1 span {
+  font-size: 4vw;
+  font-family: "Ayer";
+  font-style: italic;
+  text-transform: lowercase;
+  font-weight: 400;
+}
+
+.i-hero .row-2 h1 span {
+  font-size: 10vw;
+  font-weight: 400;
+}
+
+.index-footer {
+  position: absolute;
+  padding: 0 1em;
+  left: 50%;
+  bottom: 7.5%;
+  transform: translateX(-50%);
+}
+
+.index-footer p {
+  font-size: 1.5vw;
+  font-family: "Acid Grotesk";
+  font-weight: 400;
+}
+
+@media (max-width: 900px) {
+  .i-hero .row h1 {
+    font-size: 14vw;
+  }
+
+  .i-hero .row-1 h1 span {
+    font-size: 8vw;
+  }
+
+  .i-hero .row-2 h1 span {
+    font-size: 10vw;
+  }
+
+  .index-footer p {
+    font-size: 7vw;
+  }
+}
+
+.h1-revealer:after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 180px;
+  left: 0;
+  width: 125%;
+  height: 145%;
+  background: var(--bg);
+}
+
+.blob {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .blob {
+    margin-top: 2.5em;
+  }
+}

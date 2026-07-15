@@ -1,0 +1,187 @@
+.contact {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10em;
+}
+
+/* header */
+
+.contact .contact-header {
+  flex: 1;
+}
+
+.contact .contact-copy {
+  flex: 1;
+}
+
+.contact .contact-header h2 {
+  font-size: 10vw;
+  letter-spacing: -0.02em;
+  line-height: 0.8;
+}
+
+.contact .contact-header h2 span {
+  line-height: 0.8;
+  font-weight: 500;
+  font-family: "Ayer";
+  text-transform: uppercase;
+}
+
+.contact .contact-header h2 span#italic {
+  font-style: italic;
+}
+
+.contact .contact-header h5 {
+  font-family: "Ayer";
+  font-size: 3vw;
+  font-weight: 500;
+  width: 100%;
+  text-align: right;
+  margin: 0.4em 0;
+}
+
+/* content  */
+
+.contact-copy .contact-copy-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+}
+
+.contact-copy .contact-copy-wrapper .mail p {
+  position: relative;
+  color: var(--project-primary) !important;
+  font-family: "Ayer";
+  font-size: 3vw;
+  width: max-content;
+  color: var(--project-primary);
+  opacity: 1;
+}
+
+.contact-copy .contact-copy-wrapper .mail p:after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--project-primary);
+}
+
+.contact-copy .contact-copy-wrapper .socials {
+  display: flex;
+  gap: 2em;
+  margin-bottom: 4em;
+}
+
+.contact-copy .contact-copy-wrapper .socials .social {
+  margin: 1em 0;
+  display: flex;
+}
+
+.contact-copy .contact-copy-wrapper .socials .social p {
+  position: relative;
+  margin: 0 0.5em;
+  font-weight: 400;
+  font-size: 1.5vw;
+}
+
+.contact-copy .contact-copy-wrapper .socials .social ion-icon {
+  position: relative;
+  top: 2px;
+  font-size: 1.5vw;
+}
+
+.contact-copy .contact-copy-wrapper .newsletter {
+  width: 100%;
+}
+
+.contact-copy .contact-copy-wrapper .newsletter h4 {
+  font-family: "Canopee";
+  margin: 0.5em 0;
+}
+
+.contact-copy .contact-copy-wrapper .newsletter span {
+  font-family: "Acid Grotesk";
+  color: var(--project-primary);
+  font-size: 1vw;
+}
+
+.contact-copy .contact-copy-wrapper .newsletter .input {
+  margin: 5em 0 0 0;
+  width: 75%;
+  display: flex;
+  border-radius: 10px;
+  border: 2px solid var(--text-color);
+}
+
+.contact-copy .contact-copy-wrapper .input input {
+  flex: 2;
+  border: none;
+  background: none;
+  font-family: "Acid Grotesk";
+  font-size: 1.5vw;
+  padding: 0.2em;
+  color: var(--text-color);
+}
+
+.contact-copy .contact-copy-wrapper .input input:focus {
+  border: none;
+  outline: none;
+}
+
+.contact-copy .contact-copy-wrapper .submit {
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 900px) {
+  .contact {
+    margin-top: 20vh;
+    flex-direction: column;
+    height: max-content;
+  }
+
+  .contact .contact-header h2 {
+    font-size: 20vw;
+  }
+
+  .contact .contact-header h5 {
+    font-size: 7vw;
+  }
+
+  .contact-copy .contact-copy-wrapper {
+    margin-bottom: 15em;
+  }
+
+  .contact-copy .contact-copy-wrapper .mail p {
+    font-size: 10vw;
+  }
+
+  .contact-copy .contact-copy-wrapper .socials .social p {
+    font-size: 4vw;
+  }
+
+  .contact-copy .contact-copy-wrapper .socials .social ion-icon {
+    font-size: 4vw;
+  }
+
+  .contact-copy .contact-copy-wrapper .newsletter h4 {
+    font-size: 8vw;
+  }
+
+  .contact-copy .contact-copy-wrapper .newsletter span {
+    font-size: 3vw;
+  }
+
+  .contact-copy .contact-copy-wrapper .newsletter .input {
+    width: 100%;
+  }
+
+  .contact-copy .contact-copy-wrapper .input input {
+    font-size: 4vw;
+  }
+}

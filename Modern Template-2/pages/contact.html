@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Contact | Sierra Montana | Portfolio
+    </title>
+    <meta name="author" content="Portfolio" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/contact.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
+    <div class="logo">
+      <div class="logo-wrapper">
+        <a href="../index.html" data-bexo="user.name.br">Sierra<br />Montana</a>
+      </div>
+    </div>
+    <!-- toggle btn -->
+    <div class="btn" id="toggle-btn">
+      <div class="btn-outline btn-outline-1"></div>
+      <div class="btn-outline btn-outline-2"></div>
+      <div id="hamburger">
+        <span></span>
+      </div>
+    </div>
+
+    <!-- svg overlay -->
+    <div class="overlay">
+      <svg viewBox="0 0 350 1000">
+        <path d="M0 2S175 1 500 1s500 1 500 1V0H0Z"></path>
+      </svg>
+    </div>
+
+    <!-- menu items -->
+    <div class="menu">
+      <div class="primary-menu">
+        <div class="menu-container">
+          <div class="wrapper">
+            <div class="menu-item">
+              <a href="../index.html"><span>I</span>Index</a>
+              <div class="menu-item-revealer"></div>
+            </div>
+
+            <div class="menu-item">
+              <a href="./work.html"><span>II</span>Work</a>
+              <div class="menu-item-revealer"></div>
+            </div>
+
+            <div class="menu-item">
+              <a href="./about.html"><span>III</span>About</a>
+              <div class="menu-item-revealer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="secondary-menu">
+        <div class="menu-container">
+          <div class="wrapper">
+            <div class="menu-item">
+              <a href="./speaker.html">Author</a>
+              <div class="menu-item-revealer"></div>
+            </div>
+
+            <div class="menu-item">
+              <a href="./blogs.html">Blog</a>
+              <div class="menu-item-revealer"></div>
+            </div>
+
+            <div class="menu-item">
+              <a href="./contact.html">Contact</a>
+              <div class="menu-item-revealer"></div>
+            </div>
+          </div>
+
+          <div class="wrapper">
+            <div class="menu-item">
+              <a href="./credits.html">Credits</a>
+              <div class="menu-item-revealer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container" data-scroll-container>
+      <div class="site-content">
+        <div class="contact" data-scroll-section>
+          <div class="contact-copy">
+            <div class="contact-copy-wrapper">
+              <div class="mail">
+                <p data-bexo="sections.contact.entries.0.email">info@sierramontana.com</p>
+              </div>
+              <div class="socials">
+                <div class="socials-col">
+                  <div class="social">
+                    <!-- <ion-icon name="logo-vimeo"></ion-icon> -->
+                    <p>Vimeo</p>
+                  </div>
+
+                  <div class="social">
+                    <!-- <ion-icon name="logo-facebook"></ion-icon> -->
+                    <p>Facebook</p>
+                  </div>
+                </div>
+                <div class="socials-col">
+                  <div class="social">
+                    <!-- <ion-icon name="logo-instagram"></ion-icon> -->
+                    <p>Instagram</p>
+                  </div>
+                  <div class="social">
+                    <!-- <ion-icon name="musical-notes-sharp"></ion-icon> -->
+                    <p>Spotify</p>
+                  </div>
+                </div>
+              </div>
+              <div class="newsletter">
+                <h4>Newsletter</h4>
+                <span>Email Address</span>
+                <div class="input">
+                  <input type="text" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-header">
+            <h2>
+              <span>W</span>ant to <br />
+              &nbsp;&nbsp;&nbsp;&nbsp; st<span id="italic">a</span>rt
+              <br /><span id="italic">a</span> new. <br />&nbsp;&nbsp;project?
+            </h2>
+            <h5>Or just say hello.</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="../js/profile-data.js"></script>
+  <script src="../js/render.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/CSSRulePlugin.min.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+  <script>
+    window.addEventListener("load", () => {
+      const scroll = new LocomotiveScroll({
+        el: document.querySelector("[data-scroll-container]"),
+        smooth: true,
+        multiplier: 0.75,
+        scrollFromAnywhere: true,
+      });
+    });
+    setTimeout(() => {
+      scroll.update();
+    }, 3000);
+  </script>
+</html>
