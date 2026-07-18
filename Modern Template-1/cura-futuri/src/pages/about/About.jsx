@@ -94,9 +94,11 @@ const About = () => {
               <br />
             </div>
             <div className="about-col">
-              <div className="about-portrait-img">
-                <img src={user?.photoUrl || "/assets/images/home/portrait.jpg"} alt="" />
-              </div>
+              {user?.photoUrl && (
+                <div className="about-portrait-img">
+                  <img src={user.photoUrl} alt="" />
+                </div>
+              )}
 
               <div className="faqs">
                 <Faq data={data} />

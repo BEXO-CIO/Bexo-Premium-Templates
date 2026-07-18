@@ -2,42 +2,39 @@ import React, { useEffect, useRef, useState } from "react";
 import "./menu.css";
 
 import { Link } from "react-router-dom";
-import { gsap } from "gsap";
-
-import DefaultPreviewImg from "../../assets/images/menu/default.jpg";
-import LinkPreviewImg1 from "../../assets/images/home/portrait.jpg";
-import LinkPreviewImg2 from "../../assets/images/menu/link-2.jpg";
-import LinkPreviewImg3 from "../../assets/images/menu/link-3.jpg";
-import LinkPreviewImg4 from "../../assets/images/menu/link-4.jpg";
+import gsap from "gsap";
+import { useDisplayProfile } from "../../utils/profileHelper";
 
 const Menu = () => {
+  const { handleLabel, photoUrl, projectEntries, socials, ownerEmail } =
+    useDisplayProfile();
+
   const menuLinks = [
-    { path: "/about", label: "About" },
-    { path: "/works", label: "Work" },
-    { path: "/blog", label: "Blog" },
+    { path: "/", label: "Home" },
+    { path: "/portfolio", label: "Portfolio" },
     { path: "/contact", label: "Contact" },
+    { path: "/hire-me", label: "Hire Me" },
   ];
 
   const menuContainer = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuAnimation = useRef();
   const menuLinksAnimation = useRef();
-  const revealHoveredLinkImg = useRef();
 
   const toggleMenu = () => {
-    document.querySelector(".hamburger-icon").classList.toggle("active");
-    setIsMenuOpen(!isMenuOpen);
+    document.querySelector(".hamburger-icon")?.classList.toggle("active");
+    setIsMenuOpen((prev) => !prev);
   };
 
   const closeMenu = () => {
-    if (isMenuOpen) {
-      document.querySelector(".hamburger-icon").classList.toggle("active");
-      setIsMenuOpen(false);
-    } else return;
+    if (!isMenuOpen) return;
+    document.querySelector(".hamburger-icon")?.classList.remove("active");
+    setIsMenuOpen(false);
   };
 
   useEffect(() => {
     gsap.set(".menu-link-item-holder", { y: 125 });
+    gsap.set(".menu-footer", { opacity: 0, y: 24 });
 
     menuAnimation.current = gsap.timeline({ paused: true }).to(".menu", {
       duration: 1,
@@ -53,42 +50,58 @@ const Menu = () => {
         stagger: 0.075,
         ease: "power3.inOut",
         delay: 0.125,
-      });
-
-    revealHoveredLinkImg.current = gsap
-      .timeline({ paused: true })
-      .to(".bind-new-img", {
-        top: "0%",
-        duration: 1,
-        ease: "power.out",
-      });
+      })
+      .to(
+        ".menu-footer",
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "-=0.8",
+      );
   }, []);
 
   useEffect(() => {
     if (isMenuOpen) {
-      menuAnimation.current.play();
-      menuLinksAnimation.current.play();
+      menuAnimation.current?.play();
+      menuLinksAnimation.current?.play();
+      document.body.style.overflow = "hidden";
     } else {
-      menuAnimation.current.reverse();
-      menuLinksAnimation.current.reverse();
+      menuAnimation.current?.reverse();
+      menuLinksAnimation.current?.reverse();
+      document.body.style.overflow = "";
     }
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isMenuOpen]);
 
-  // handle link hover animation
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === "Escape" && isMenuOpen) closeMenu();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isMenuOpen]);
+
   useEffect(() => {
     const previewContainer = document.querySelector(".link-preview-img");
     const menuLinkItems = document.querySelectorAll(".menu-link-item");
-    const linkImages = [
-      LinkPreviewImg1,
-      LinkPreviewImg2,
-      LinkPreviewImg3,
-      LinkPreviewImg4,
-    ];
+    if (!previewContainer || !menuLinkItems.length) return undefined;
+
+    const projectImages = (projectEntries || []).flatMap((p) => p.images || []);
+    const linkImages = menuLinks.map(
+      (_, i) => projectImages[i % Math.max(projectImages.length, 1)] || photoUrl || "",
+    );
 
     let lastHoveredIndex = null;
+    const handlers = [];
 
-    const handleMouseOver = (index) => {
-      if (index !== lastHoveredIndex) {
+    menuLinkItems.forEach((item, index) => {
+      const handleMouseOver = () => {
+        if (index === lastHoveredIndex || !linkImages[index]) return;
         const imgContainer = document.createElement("div");
         imgContainer.classList.add("bind-new-img");
         const img = document.createElement("img");
@@ -105,42 +118,35 @@ const Menu = () => {
           ease: "power3.out",
           onComplete: () => {
             gsap.delayedCall(2, () => {
-              const allImgContainers =
-                previewContainer.querySelectorAll(".bind-new-img");
-
+              const allImgContainers = previewContainer.querySelectorAll(".bind-new-img");
               if (allImgContainers.length > 1) {
                 Array.from(allImgContainers)
                   .slice(0, -1)
-                  .forEach((container) => {
-                    setTimeout(() => {
-                      container.remove();
-                    }, 2000);
-                  });
+                  .forEach((container) => container.remove());
               }
             });
           },
         });
 
         lastHoveredIndex = index;
-      }
-    };
+      };
 
-    menuLinkItems.forEach((item, index) => {
-      item.addEventListener("mouseover", () => handleMouseOver(index));
+      item.addEventListener("mouseover", handleMouseOver);
+      handlers.push({ item, handleMouseOver });
     });
 
     return () => {
-      menuLinkItems.forEach((item) => {
-        item.removeEventListener("mouseover", () => handleMouseOver(index));
+      handlers.forEach(({ item, handleMouseOver }) => {
+        item.removeEventListener("mouseover", handleMouseOver);
       });
     };
-  }, []);
+  }, [photoUrl, projectEntries]);
 
   return (
     <div className="menu-container" ref={menuContainer}>
       <div className="menu-bar">
         <div className="menu-logo" onClick={closeMenu}>
-          <Link to="/">Cura Futuri</Link>
+          <Link to="/">{handleLabel}</Link>
         </div>
         <div className="menu-actions">
           <div className="contact-btn">
@@ -149,29 +155,29 @@ const Menu = () => {
             </div>
           </div>
           <div className="menu-toggle">
-            <button className="hamburger-icon" onClick={toggleMenu}></button>
+            <button
+              className="hamburger-icon"
+              onClick={toggleMenu}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
+            />
           </div>
         </div>
       </div>
-      <div className="menu">
-        <div className="link-preview-img">
-          <img src={DefaultPreviewImg} alt="" />
-
-          <div className="bind-new-img">
-            <img src={LinkPreviewImg1} alt="" />
+      <div className="menu" aria-hidden={!isMenuOpen}>
+        {photoUrl && (
+          <div className="link-preview-img" aria-hidden="true">
+            <img src={photoUrl} alt="" />
           </div>
-        </div>
+        )}
         <div className="menu-col">
           <div className="menu-sub-col">
             <div className="menu-links">
               {menuLinks.map((link, index) => (
-                <div
-                  key={index}
-                  className="menu-link-item"
-                  onClick={toggleMenu}
-                >
+                <div key={link.path} className="menu-link-item" onClick={toggleMenu}>
                   <div className="menu-link-item-holder">
                     <Link className="menu-link" to={link.path}>
+                      <span className="menu-link-index">0{index + 1}</span>
                       {link.label}
                     </Link>
                   </div>
@@ -179,6 +185,27 @@ const Menu = () => {
               ))}
             </div>
           </div>
+        </div>
+        <div className="menu-footer">
+          {ownerEmail && (
+            <a className="menu-meta-link" href={`mailto:${ownerEmail}`} onClick={closeMenu}>
+              {ownerEmail}
+            </a>
+          )}
+          {socials?.length > 0 && (
+            <div className="menu-socials">
+              {socials.map((social) => (
+                <a
+                  key={`${social.label}-${social.url}`}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {social.label}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import Marquee from "react-fast-marquee";
 import MagneticButton from "../../components/magneticbutton/MagneticButton";
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { useProfile } from "../../utils/profileHelper";
 
 const Works = () => {
@@ -100,7 +100,7 @@ const Works = () => {
         <section className="project-list">
           {projects.map((project, index) => {
             const isLeft = index % 2 === 0; // Even indexes are on the left, odd on the right
-            const imageUrl = project.images?.[0] || "/assets/images/projects/project-1.jpg";
+            const imageUrl = project.images?.[0] || "";
             
             return (
               <div className="project-list-row" key={project.id || index}>
@@ -111,11 +111,13 @@ const Works = () => {
                         className="project-item"
                         onMouseOver={() => handleMouseOver(index, imageUrl)}
                       >
-                        <div className="project-img">
-                          <Link to={`/projects/${project.id}`}>
-                            <img src={imageUrl} alt={project.title} />
-                          </Link>
-                        </div>
+                        {imageUrl && (
+                          <div className="project-img">
+                            <Link to={`/projects/${project.id}`}>
+                              <img src={imageUrl} alt={project.title} />
+                            </Link>
+                          </div>
+                        )}
                         <div className="project-copy copy-pos-right">
                           <h2>{project.title}</h2>
                         </div>
@@ -131,11 +133,13 @@ const Works = () => {
                         className="project-item"
                         onMouseOver={() => handleMouseOver(index, imageUrl)}
                       >
-                        <div className="project-img">
-                          <Link to={`/projects/${project.id}`}>
-                            <img src={imageUrl} alt={project.title} />
-                          </Link>
-                        </div>
+                        {imageUrl && (
+                          <div className="project-img">
+                            <Link to={`/projects/${project.id}`}>
+                              <img src={imageUrl} alt={project.title} />
+                            </Link>
+                          </div>
+                        )}
                         <div className="project-copy copy-pos-left">
                           <h2>{project.title}</h2>
                         </div>

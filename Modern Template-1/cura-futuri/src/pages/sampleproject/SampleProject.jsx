@@ -79,23 +79,27 @@ const SampleProject = () => {
   const currentIndex = projects.findIndex((p) => p.id === project.id);
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
-  const heroImage = project.images?.[0] || "/assets/images/projects/project-1.jpg";
-  const secondImage = project.images?.[1] || heroImage;
-  const thirdImage = project.images?.[2] || heroImage;
-  const fourthImage = project.images?.[3] || heroImage;
-  const fifthImage = project.images?.[4] || heroImage;
+  const heroImage = project.images?.[0] || "";
+  const secondImage = project.images?.[1] || "";
+  const thirdImage = project.images?.[2] || "";
+  const fourthImage = project.images?.[3] || "";
+  const fifthImage = project.images?.[4] || "";
 
-  const nextProjectImage = nextProject?.images?.[0] || "/assets/images/projects/project-1.jpg";
+  const nextProjectImage = nextProject?.images?.[0] || "";
 
   return (
     <div className="project page">
-      <section className="project-hero">
-        <img src={heroImage} alt={project.title} />
-      </section>
+      {heroImage && (
+        <section className="project-hero">
+          <img src={heroImage} alt={project.title} />
+        </section>
+      )}
 
-      <div className="nextProjectPreviewBg">
-        <img src={nextProjectImage} alt={nextProject?.title} />
-      </div>
+      {nextProjectImage && (
+        <div className="nextProjectPreviewBg">
+          <img src={nextProjectImage} alt={nextProject?.title} />
+        </div>
+      )}
 
       <div className="container">
         <section className="project-title">
@@ -148,30 +152,40 @@ const SampleProject = () => {
         </section>
 
         <section className="project-images">
-          <div className="project-img-row">
-            <div className="project-img">
-              <img src={secondImage} alt="" />
+          {(secondImage || thirdImage) && (
+            <div className="project-img-row">
+              {secondImage && (
+                <div className="project-img">
+                  <img src={secondImage} alt="" />
+                </div>
+              )}
+              {thirdImage && (
+                <div className="project-img">
+                  <img src={thirdImage} alt="" />
+                </div>
+              )}
             </div>
-
-            <div className="project-img">
-              <img src={thirdImage} alt="" />
+          )}
+          {(fourthImage || fifthImage) && (
+            <div className="project-img-row">
+              {fourthImage && (
+                <div className="project-img">
+                  <img src={fourthImage} alt="" />
+                </div>
+              )}
+              {fifthImage && (
+                <div className="project-img">
+                  <img src={fifthImage} alt="" />
+                </div>
+              )}
             </div>
-          </div>
-          <div className="project-img-row">
-            <div className="project-img">
-              <img src={fourthImage} alt="" />
-            </div>
-
-            <div className="project-img">
-              <img src={fifthImage} alt="" />
-            </div>
-          </div>
+          )}
         </section>
 
         {nextProject && (
           <section className="next-project">
             <div className="next-project-preview">
-              <img src={nextProjectImage} alt="" />
+              {nextProjectImage && <img src={nextProjectImage} alt="" />}
             </div>
             <div className="next-project-copy">
               <p>

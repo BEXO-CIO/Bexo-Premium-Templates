@@ -1,20 +1,14 @@
-import "./App.css";
-
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 import Menu from "./components/menu/Menu";
 import Footer from "./components/footer/Footer";
+import ThemeLab from "./components/theme-lab/ThemeLab";
 
 import Home from "./pages/home/Home";
-import About from "./pages/about/About";
-import Works from "./pages/works/Works";
+import Portfolio from "./pages/portfolio/Portfolio";
 import Contact from "./pages/contact/Contact";
-import Blog from "./pages/blog/Blog";
-
-import SampleProject from "./pages/sampleproject/SampleProject";
-import SampleBlog from "./pages/sampleblog/SampleBlog";
-
-import { AnimatePresence } from "framer-motion";
+import HireMeRedirect from "./pages/hireme/HireMeRedirect";
 
 function App() {
   const location = useLocation();
@@ -26,15 +20,21 @@ function App() {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route index element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/works" element={<Works />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/projects/:id" element={<SampleProject />} />
-          <Route path="/sample-blog" element={<SampleBlog />} />
+          <Route path="/hire-me" element={<HireMeRedirect />} />
+          {/* Legacy redirects */}
+          <Route path="/about" element={<Navigate to="/portfolio" replace />} />
+          <Route path="/works" element={<Navigate to="/portfolio" replace />} />
+          <Route path="/projects/:id" element={<Navigate to="/portfolio" replace />} />
+          <Route path="/blog" element={<Navigate to="/" replace />} />
+          <Route path="/sample-blog" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
       {showFooter && <Footer />}
+      {/* Local/dev only — returns null on production mybexo.com */}
+      <ThemeLab />
     </>
   );
 }

@@ -4,10 +4,15 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background: var(--color-accent);
+  /* Page wipe tinted with the user's accent instead of a jarring flat blue */
+  background: linear-gradient(
+    170deg,
+    rgba(var(--accent-rgb), 0.32),
+    rgba(13, 13, 17, 0.97) 60%
+  ), #0d0d11;
   transform-origin: bottom;
   pointer-events: none;
-  z-index: 2;
+  z-index: 2000;
 }
 
 .slide-out {
@@ -16,8 +21,12 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background: var(--color-accent);
+  background: linear-gradient(
+    170deg,
+    rgba(var(--accent-rgb), 0.32),
+    rgba(13, 13, 17, 0.97) 60%
+  ), #0d0d11;
   transform-origin: top;
   pointer-events: none;
-  z-index: 2;
+  z-index: 2000;
 }
