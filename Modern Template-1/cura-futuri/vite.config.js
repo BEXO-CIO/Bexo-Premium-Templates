@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // Relative assets let the gateway serve this bundle at either a handle
+  // subdomain root or /api/render/:handle without a separate template host.
+  base: './',
   plugins: [react()],
   server: {
     port: 5174,

@@ -14,7 +14,7 @@ async function boot() {
   ]);
 
   ReactDOM.createRoot(document.getElementById("root")).render(
-    <Router>
+    <Router basename={window.__BEXO_BASE_PATH__ || "/"}>
       <Routes>
         <Route path="/*" element={<App />} />
       </Routes>
