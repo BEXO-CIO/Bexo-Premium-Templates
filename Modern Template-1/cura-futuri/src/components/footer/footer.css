@@ -53,3 +53,27 @@
     padding-top: 1em;
   }
 }
+
+.footer-bexo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  margin-top: 0.9em;
+  font-family: "Inter", sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  transition: color 0.25s ease;
+}
+
+.footer-bexo img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  opacity: 0.8;
+}
+
+.footer-bexo:hover {
+  color: rgba(255, 255, 255, 0.75);
+}

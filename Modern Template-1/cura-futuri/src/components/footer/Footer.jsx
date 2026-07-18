@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDisplayProfile } from "../../utils/profileHelper";
+import bexoLogo from "../../assets/bexo-logo.png";
 import "./footer.css";
 
 const Footer = () => {
@@ -49,6 +50,16 @@ const Footer = () => {
         <p>
           &copy; {new Date().getFullYear()} {user?.name || "Portfolio"}. All rights reserved.
         </p>
+        <a
+          className="footer-bexo"
+          href="https://mybexo.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Built with BEXO"
+        >
+          <img src={bexoLogo} alt="" loading="lazy" />
+          <span>Built with BEXO</span>
+        </a>
       </div>
     </div>
   );
