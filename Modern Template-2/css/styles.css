@@ -1,8 +1,9 @@
 :root {
   --bg: #e4e3db;
-  --text-color: #e4e3db;
-  --project-primary: #e88640;
+  --text-color: #0a0a0a;
+  --project-primary: rgb(var(--accent-rgb, 200, 140, 70));
   --project-footer: #0a0a0a;
+  --accent-rgb: 200, 140, 70;
 }
 * {
   margin: 0;
