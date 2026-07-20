@@ -9,7 +9,6 @@ import bexoLogo from "../../assets/bexo-logo.png";
 const Footer = () => {
   const { user, ownerEmail, resumeUrl, nameParts, nameFitClass } = useDisplayProfile();
   const parts = nameParts || splitDisplayName(user?.name);
-  const year = new Date().getFullYear();
   const emailLocal = ownerEmail?.split("@")[0];
   const emailDomain = ownerEmail?.split("@")[1];
   const firstName = parts.firstName || "Portfolio";
@@ -103,7 +102,7 @@ const Footer = () => {
 
         <div className="footer-copyright-line">
           <p className="primary sm footer-copy">
-            &copy; {year} BEXO FROM Ace Digital. All rights reserved.
+            &copy; 2026 BEXO From Ace Digital. All rights reserved.
           </p>
           <a
             className="footer-bexo"

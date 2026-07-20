@@ -48,7 +48,7 @@ const Footer = () => {
       </div>
       <div className="footer-copyright">
         <p>
-          &copy; {new Date().getFullYear()} BEXO FROM Ace Digital. All rights reserved.
+          &copy; 2026 BEXO From Ace Digital. All rights reserved.
         </p>
         <a
           className="footer-bexo"
