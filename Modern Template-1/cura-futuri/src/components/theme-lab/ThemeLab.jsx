@@ -16,7 +16,7 @@ import { useDisplayProfile } from "../../utils/profileHelper";
 import "./theme-lab.css";
 
 /**
- * Local/dev theme playground. Hidden on production mybexo.com —
+ * Local/dev theme playground. Hidden on production mybexo.cyou —
  * live sites only receive theme from the web portal.
  */
 const ThemeLab = () => {

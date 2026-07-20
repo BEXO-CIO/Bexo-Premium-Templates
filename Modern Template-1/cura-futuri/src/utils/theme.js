@@ -10,7 +10,7 @@
  * a text accent, muted enough not to fight the typography.
  *
  * Theme Lab (local/dev only): session overrides for visual QA. Production
- * sites on mybexo.com never expose the lab — themes come from the portal.
+ * sites on mybexo.cyou never expose the lab — themes come from the portal.
  */
 
 export const THEME_COLORS = [
@@ -43,12 +43,12 @@ const LAB_EVENT = "bexo-theme-lab";
 
 /**
  * Theme Lab is disabled by default (kept for later QA).
- * Opt-in only via ?themeLab=1 — never auto-shown, never on mybexo.com.
+ * Opt-in only via ?themeLab=1 — never auto-shown, never on mybexo.cyou.
  */
 export function isThemeLabEnabled() {
   if (typeof window === "undefined") return false;
   const host = window.location.hostname;
-  if (host === "mybexo.com" || host.endsWith(".mybexo.com")) return false;
+  if (host === "mybexo.cyou" || host.endsWith(".mybexo.cyou")) return false;
   return new URLSearchParams(window.location.search).has("themeLab");
 }
 

@@ -1,0 +1,188 @@
+.np-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200000;
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 15, 15, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: max(env(safe-area-inset-top), 1rem) max(env(safe-area-inset-right), 1rem)
+    max(env(safe-area-inset-bottom), 1rem) max(env(safe-area-inset-left), 1rem);
+  animation: np-lightbox-in 0.28s ease both;
+}
+
+@keyframes np-lightbox-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.np-lightbox-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.35rem 0.25rem 1rem;
+}
+
+.np-lightbox-caption {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  min-width: 0;
+  color: #e3e3db;
+}
+
+.np-lightbox-title {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.np-lightbox-count {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.np-lightbox-close {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e3e3db;
+  background: transparent;
+  border: 1px dashed rgba(227, 227, 219, 0.45);
+  border-radius: 999px;
+  padding: 0.55em 1.35em;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.np-lightbox-close:hover,
+.np-lightbox-close:focus-visible {
+  background: #e3e3db;
+  color: #0f0f0f;
+  border-color: #e3e3db;
+}
+
+.np-lightbox-stage {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.np-lightbox-image {
+  max-width: min(100%, 1100px);
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  animation: np-lightbox-slide 0.3s ease both;
+}
+
+@keyframes np-lightbox-slide {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.np-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1px dashed rgba(227, 227, 219, 0.4);
+  background: rgba(15, 15, 15, 0.45);
+  color: #e3e3db;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.np-lightbox-nav:hover,
+.np-lightbox-nav:focus-visible {
+  border-color: #e3e3db;
+  background: rgba(227, 227, 219, 0.12);
+}
+
+.np-lightbox-nav--prev {
+  left: 0.5rem;
+}
+
+.np-lightbox-nav--next {
+  right: 0.5rem;
+}
+
+.np-lightbox-thumbs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 1rem 0 0.25rem;
+  overflow-x: auto;
+}
+
+.np-lightbox-thumb {
+  flex: 0 0 auto;
+  width: 3.25rem;
+  height: 2.35rem;
+  padding: 0;
+  border: 1px dashed transparent;
+  border-radius: 0.35rem;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.45;
+  background: transparent;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.np-lightbox-thumb.is-active,
+.np-lightbox-thumb:hover {
+  opacity: 1;
+  border-color: rgba(227, 227, 219, 0.7);
+}
+
+.np-lightbox-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 700px) {
+  .np-lightbox-nav {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .np-lightbox-nav--prev {
+    left: 0;
+  }
+
+  .np-lightbox-nav--next {
+    right: 0;
+  }
+}

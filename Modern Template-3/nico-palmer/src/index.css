@@ -1,0 +1,375 @@
+@import "./fonts.css";
+
+:root {
+  --bg: #e3e3db;
+  --bg200: rgba(227, 227, 219, 0.25);
+  --fg: #0f0f0f;
+  --fg200: #1f1f1f;
+  --accent-rgb: 170, 120, 55;
+  --accent: rgb(var(--accent-rgb));
+  --accent-solid-text: #0f0f0f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Messina Sans";
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* Brand marks — keep intrinsic sizing (global img rule above would stretch them) */
+.boot-loader-brand,
+.menu-logo img,
+img[alt="BEXO"] {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  will-change: auto;
+}
+
+/* Footer credit mark — keep compact (do not inherit width:auto from brand rule) */
+.footer-bexo img {
+  width: 14px !important;
+  height: 14px !important;
+  max-width: 14px !important;
+  max-height: 14px !important;
+  object-fit: contain;
+  will-change: auto;
+  opacity: 0.85;
+}
+
+.menu-logo img {
+  width: 22px;
+  height: 22px;
+  max-width: 22px;
+  object-fit: contain;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  text-transform: uppercase;
+  font-family: "Rader";
+}
+
+h1 {
+  font-size: 8vw;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 6.4vw;
+}
+
+h2 {
+  font-size: 5vw;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 4vw;
+}
+
+h3 {
+  font-size: 4vw;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 3.4vw;
+}
+
+h4 {
+  font-size: 2vw;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 2vw;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+p {
+  font-family: "Messina Sans";
+  font-size: 1rem;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+}
+
+p.primary {
+  text-transform: uppercase;
+  font-family: "Messina Sans Mono";
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  -webkit-font-smoothing: antialiased;
+}
+
+p.secondary {
+  font-family: "Messina Sans";
+  font-size: 1rem;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+}
+
+p.primary.sm {
+  text-transform: uppercase;
+  font-family: "Messina Sans Mono";
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  -webkit-font-smoothing: antialiased;
+}
+
+p.secondary.sm {
+  font-family: "Messina Sans";
+  font-size: 0.8rem;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--fg);
+  font-family: "Messina Sans Mono";
+  font-size: 0.8rem;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  outline: none;
+  border: none;
+}
+
+input,
+textarea,
+input:active,
+input:focus,
+textarea:active,
+textarea:focus {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 1em;
+  font-family: "Messina Sans";
+  font-size: 1rem;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+  border-radius: 0.5rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-family: "Messina Sans";
+  font-size: 1rem;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn {
+  text-decoration: none;
+  text-transform: uppercase;
+  display: block;
+  width: max-content;
+  padding: 1em 2em;
+  font-family: "Messina Sans Mono";
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: 0.4em;
+  background-color: var(--fg);
+  color: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  border: 1px solid var(--fg);
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--fg);
+}
+
+.btn--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+a.is-active,
+.menu-link.is-active {
+  color: var(--accent);
+}
+
+/* Boot loader */
+.boot-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  background: var(--bg);
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.boot-loader.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.boot-loader-brand {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  opacity: 0;
+  animation: boot-brand-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.boot-loader-text {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: boot-text-in 0.7s ease 0.15s forwards;
+}
+
+.boot-loader-text::after {
+  content: "";
+  display: block;
+  width: 140px;
+  height: 1.5px;
+  margin: 1rem auto 0;
+  background:
+    linear-gradient(90deg, var(--accent), var(--accent)) no-repeat,
+    rgba(15, 15, 15, 0.12);
+  background-size: 40% 100%, 100% 100%;
+  animation: boot-progress 1.4s ease-in-out infinite;
+}
+
+@keyframes boot-brand-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes boot-text-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 0.6; transform: none; }
+}
+
+@keyframes boot-progress {
+  0% { background-position: -60% 0, 0 0; }
+  100% { background-position: 160% 0, 0 0; }
+}
+
+/* Theme backgrounds — accent-tied, distinct on the cream canvas */
+html[data-theme-bg] body::before,
+html[data-theme-bg] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+html[data-theme-bg="grid"] body::before {
+  background-image:
+    linear-gradient(rgba(15, 15, 15, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 15, 15, 0.045) 1px, transparent 1px),
+    linear-gradient(rgba(var(--accent-rgb), 0.2) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(var(--accent-rgb), 0.2) 1.5px, transparent 1.5px);
+  background-size: 34px 34px, 34px 34px, 170px 170px, 170px 170px;
+  opacity: 0.85;
+}
+
+html[data-theme-bg="dots"] body::before {
+  background-image: radial-gradient(rgba(var(--accent-rgb), 0.38) 1.5px, transparent 1.6px);
+  background-size: 22px 22px;
+  opacity: 0.9;
+}
+
+html[data-theme-bg="waves"] body::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40' viewBox='0 0 120 40'%3E%3Cpath d='M0 20 Q 15 4 30 20 T 60 20 T 90 20 T 120 20' fill='none' stroke='%230f0f0f' stroke-opacity='0.45' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 120px 40px;
+  opacity: 0.28;
+  animation: nico-wave-drift 18s linear infinite;
+}
+
+html[data-theme-bg="waves"] body::after {
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(var(--accent-rgb), 0.16), transparent 45%),
+    radial-gradient(ellipse at 85% 100%, rgba(var(--accent-rgb), 0.14), transparent 42%);
+}
+
+html[data-theme-bg="solid"] body::before {
+  background:
+    radial-gradient(ellipse 70% 70% at 100% 0%, rgba(var(--accent-rgb), 0.18), transparent 55%),
+    radial-gradient(ellipse 90% 90% at 0% 100%, rgba(15, 15, 15, 0.05), transparent 60%);
+}
+
+@keyframes nico-wave-drift {
+  from { background-position: 0 0; }
+  to { background-position: 120px 0; }
+}
+
+#root,
+.page {
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep menu fixed overlay — never let it take document flow height */
+.menu-container {
+  position: fixed;
+  z-index: 100;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-loader-brand,
+  .boot-loader-text { animation-duration: 0.01ms; opacity: 1; }
+  .boot-loader-text::after { animation: none; }
+  html[data-theme-bg="waves"] body::before { animation: none; }
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    font-size: 14vw;
+    line-height: 12vw;
+  }
+
+  h2 {
+    font-size: 10vw;
+    line-height: 8vw;
+  }
+
+  h3 {
+    font-size: 8vw;
+    line-height: 7vw;
+  }
+
+  h4 {
+    font-size: 6vw;
+    line-height: 6vw;
+  }
+}
