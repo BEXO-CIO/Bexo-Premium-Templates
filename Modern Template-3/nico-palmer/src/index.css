@@ -20,6 +20,16 @@ body {
   font-family: "Messina Sans";
   background-color: var(--bg);
   color: var(--fg);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 img {
