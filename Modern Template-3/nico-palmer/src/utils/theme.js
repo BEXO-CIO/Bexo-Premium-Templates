@@ -3,7 +3,7 @@
  * cinematic canvas (#e3e3db). Accents are deeper/inkier than Cura's
  * neon-on-black so they read as editorial highlights on paper.
  *
- * Theme Lab: auto on localhost; never on mybexo.cyou.
+ * Theme Lab: auto on localhost; never on atbexo.com.
  */
 
 export const THEME_COLORS = [
@@ -37,7 +37,7 @@ const LAB_EVENT = "bexo-theme-lab-nico";
 export function isThemeLabEnabled() {
   if (typeof window === "undefined") return false;
   const host = window.location.hostname || "";
-  if (host === "mybexo.cyou" || host.endsWith(".mybexo.cyou")) return false;
+  if (host === "atbexo.com" || host.endsWith(".atbexo.com")) return false;
   if (new URLSearchParams(window.location.search).has("themeLab")) return true;
   const devHosts = ["localhost", "127.0.0.1", "0.0.0.0", ""];
   return devHosts.includes(host) || host.endsWith(".local");

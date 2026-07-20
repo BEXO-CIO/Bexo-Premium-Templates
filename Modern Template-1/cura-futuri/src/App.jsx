@@ -33,7 +33,7 @@ function App() {
         </Routes>
       </AnimatePresence>
       {showFooter && <Footer />}
-      {/* Local/dev only — returns null on production mybexo.cyou */}
+      {/* Local/dev only — returns null on production atbexo.com */}
       <ThemeLab />
     </>
   );

@@ -52,7 +52,7 @@ const Footer = () => {
         </p>
         <a
           className="footer-bexo"
-          href="https://mybexo.cyou"
+          href="https://atbexo.com"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Built with BEXO"

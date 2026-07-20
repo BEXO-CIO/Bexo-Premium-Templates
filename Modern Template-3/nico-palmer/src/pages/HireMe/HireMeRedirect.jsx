@@ -19,7 +19,7 @@ const HireMeRedirect = () => {
     // When served via subdomain proxy, go to the main web app hire-me route
     const webOrigin = isLocal
       ? "http://localhost:5173"
-      : `${window.location.protocol}//mybexo.cyou`;
+      : `${window.location.protocol}//atbexo.com`;
 
     window.location.replace(`${webOrigin}/hire-me/${encodeURIComponent(handle)}`);
   }, [handle]);
