@@ -135,6 +135,7 @@ const Portfolio = () => {
     certificateEntries,
     achievementEntries,
     researchEntries,
+    skillEntries,
     ownerEmail,
     socials,
     photoUrl,
@@ -149,6 +150,13 @@ const Portfolio = () => {
 
   const openLightbox = (images, startIndex, title) =>
     setLightbox({ images, startIndex, title });
+
+  const SKILL_CATEGORY_LABELS = [
+    { id: "technical", label: "Technical" },
+    { id: "tools", label: "Tools" },
+    { id: "soft", label: "Soft" },
+    { id: "languages", label: "Languages" },
+  ];
 
   useEffect(() => {
     headerReveal.current = gsap
@@ -182,7 +190,8 @@ const Portfolio = () => {
     projectEntries?.length ||
     certificateEntries?.length ||
     achievementEntries?.length ||
-    researchEntries?.length;
+    researchEntries?.length ||
+    skillEntries?.length;
 
   return (
     <div className="portfolio page">
@@ -465,6 +474,36 @@ const Portfolio = () => {
                       <AssetActions pdfs={item.pdfs} />
                     </article>
                   ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {skillEntries?.length > 0 && (
+          <section className="portfolio-section" id="skills">
+            <div className="portfolio-row">
+              <div className="portfolio-col portfolio-col--label">
+                <SectionLabel count={skillEntries.length}>Skills</SectionLabel>
+              </div>
+              <div className="portfolio-col">
+                <div className="portfolio-skills">
+                  {SKILL_CATEGORY_LABELS.map((cat) => {
+                    const group = skillEntries.filter(
+                      (s) => (s.category || "technical") === cat.id,
+                    );
+                    if (!group.length) return null;
+                    return (
+                      <div className="portfolio-skills-group" key={cat.id}>
+                        <p className="portfolio-skills-label">{cat.label}</p>
+                        <div className="portfolio-tags">
+                          {group.map((skill) => (
+                            <span key={skill.id || skill.name}>{skill.name}</span>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

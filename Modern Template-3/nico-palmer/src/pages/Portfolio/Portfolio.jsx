@@ -113,6 +113,7 @@ const Portfolio = () => {
     certificateEntries,
     achievementEntries,
     researchEntries,
+    skillEntries,
     ownerEmail,
     socials,
     photoUrl,
@@ -129,6 +130,13 @@ const Portfolio = () => {
   const openLightbox = (images, startIndex, title) =>
     setLightbox({ images, startIndex, title });
 
+  const SKILL_CATEGORY_LABELS = [
+    { id: "technical", label: "Technical" },
+    { id: "tools", label: "Tools" },
+    { id: "soft", label: "Soft" },
+    { id: "languages", label: "Languages" },
+  ];
+
   const hasAnyContent =
     aboutEntries?.length ||
     educationEntries?.length ||
@@ -137,6 +145,7 @@ const Portfolio = () => {
     certificateEntries?.length ||
     achievementEntries?.length ||
     researchEntries?.length ||
+    skillEntries?.length ||
     profile?.bio ||
     photoUrl;
 
@@ -205,6 +214,7 @@ const Portfolio = () => {
     certificateEntries?.length,
     achievementEntries?.length,
     researchEntries?.length,
+    skillEntries?.length,
   ]);
 
   return (
@@ -539,6 +549,36 @@ const Portfolio = () => {
                       <AssetActions pdfs={item.pdfs} />
                     </article>
                   ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {skillEntries?.length > 0 && (
+          <section className="pf-section" id="skills">
+            <div className="pf-row">
+              <div className="pf-col pf-col--label">
+                <SectionLabel count={skillEntries.length}>Skills</SectionLabel>
+              </div>
+              <div className="pf-col">
+                <div className="pf-skills">
+                  {SKILL_CATEGORY_LABELS.map((cat) => {
+                    const group = skillEntries.filter(
+                      (s) => (s.category || "technical") === cat.id,
+                    );
+                    if (!group.length) return null;
+                    return (
+                      <div className="pf-skills-group" key={cat.id}>
+                        <p className="primary sm pf-skills-label">{cat.label}</p>
+                        <div className="pf-tags">
+                          {group.map((skill) => (
+                            <span key={skill.id || skill.name}>{skill.name}</span>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

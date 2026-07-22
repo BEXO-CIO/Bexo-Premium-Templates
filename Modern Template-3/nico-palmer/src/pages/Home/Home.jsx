@@ -124,6 +124,42 @@ const Home = () => {
     };
   }, [stickyLine1, stickyLine2, stickyLine3]);
 
+  // Watermark choreography: opens as primary type on its own stage, recedes
+  // to a subtle backdrop while project cards ride over it, then swells back
+  // to primary once the list has passed. An IntersectionObserver watches the
+  // band the sticky title occupies (~30%–52% of the viewport), so it stays
+  // in sync with lazy-loaded images and works even when rAF is throttled;
+  // the easing itself is a CSS transition.
+  useEffect(() => {
+    const section = homeWorkRef.current;
+    const text = section?.querySelector(".home-work-watermark-text");
+    if (!section || !text) return undefined;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      text.classList.add("is-subtle");
+      return undefined;
+    }
+
+    const items = Array.from(section.querySelectorAll(".home-work-item"));
+    if (!items.length) return undefined;
+
+    const inBand = new Set();
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) inBand.add(entry.target);
+          else inBand.delete(entry.target);
+        });
+        text.classList.toggle("is-subtle", inBand.size > 0);
+      },
+      // Watermark band: sticky top is 42vh desktop / 38vh mobile
+      { rootMargin: "-30% 0% -48% 0%", threshold: 0 },
+    );
+    items.forEach((el) => io.observe(el));
+
+    return () => io.disconnect();
+  }, [projects.length, selectsLabel]);
+
   // Dynamically fit long project titles into their boxes (letter-count aware).
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll(".home-work-title"));
@@ -246,7 +282,10 @@ const Home = () => {
 
         {projects.length > 0 && (
           <section ref={homeWorkRef} className={`home-work ${nameFitClass || ""}`}>
-            {/* Sticky background title — rides with scroll through projects, releases at section end */}
+            <p className="primary sm home-work-kicker">Selected Work</p>
+
+            {/* Sticky title — opens as primary type on its own stage, recedes
+                while cards ride over it, then returns as the section releases */}
             <div className="home-work-watermark" aria-hidden="true">
               <div className="home-work-watermark-inner">
                 <FitText
@@ -258,8 +297,6 @@ const Home = () => {
             </div>
 
             <div className="home-work-foreground">
-              <p className="primary sm home-work-kicker">Selected Work</p>
-
               <div className="home-work-list">
                 {projects.map((work, index) => {
                   const title = work.title || "Untitled project";

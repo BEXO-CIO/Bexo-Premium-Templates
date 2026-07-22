@@ -377,6 +377,24 @@
   gap: 0.4rem;
 }
 
+.pf-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pf-skills-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.pf-skills-label {
+  opacity: 0.55;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .pf-tags span {
   font-family: "Messina Sans Mono", monospace;
   font-size: 0.65rem;

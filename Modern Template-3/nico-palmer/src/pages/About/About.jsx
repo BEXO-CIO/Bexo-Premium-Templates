@@ -10,6 +10,13 @@ import { useProfile } from "../../utils/profileHelper";
 
 import Transition from "../../components/Transition/Transition";
 
+const SKILL_CATEGORY_LABELS = [
+  { id: "technical", label: "Technical" },
+  { id: "tools", label: "Tools" },
+  { id: "soft", label: "Soft" },
+  { id: "languages", label: "Languages" },
+];
+
 const About = () => {
   const { user, profile, sections } = useProfile();
   const aboutEntry = sections?.about?.entries?.[0] || {};
@@ -18,6 +25,7 @@ const About = () => {
   const certificates = sections?.certificates?.entries || [];
   const achievements = sections?.achievements?.entries || [];
   const research = sections?.research?.entries || [];
+  const skills = sections?.skills?.entries || [];
 
   return (
     <ReactLenis root>
@@ -202,50 +210,45 @@ const About = () => {
           </div>
         </section>
 
-        <section className="fav-tools">
-          <div className="fav-tools-header">
-            <AnimatedCopy tag="p" animateOnScroll={true} className="primary sm">
-              Core Capabilities
-            </AnimatedCopy>
-            <AnimatedCopy tag="h2" animateOnScroll={true} delay={0.25}>
-              Technical Skills
-            </AnimatedCopy>
-            <AnimatedCopy
-              tag="p"
-              animateOnScroll={true}
-              className="secondary"
-              delay={0.5}
-            >
-              My expertise covers modern frontend tech, interaction tools, and frameworks.
-            </AnimatedCopy>
-          </div>
-
-          <div className="fav-tools-list">
-            <div className="fav-tools-list-row">
-              <div className="fav-tool">
-                <div className="fav-tool-img">
-                  <img src="/about/tool-1.jpg" alt="" />
-                </div>
-                <h4>React & GSAP</h4>
-                <p className="primary sm">Interactive UI</p>
-              </div>
-              <div className="fav-tool">
-                <div className="fav-tool-img">
-                  <img src="/about/tool-2.jpg" alt="" />
-                </div>
-                <h4>Framer Motion</h4>
-                <p className="primary sm">Transitions</p>
-              </div>
-              <div className="fav-tool">
-                <div className="fav-tool-img">
-                  <img src="/about/tool-3.jpg" alt="" />
-                </div>
-                <h4>WebGL & CSS Grid</h4>
-                <p className="primary sm">Layout Design</p>
-              </div>
+        {skills.length > 0 && (
+          <section className="fav-tools">
+            <div className="fav-tools-header">
+              <AnimatedCopy tag="p" animateOnScroll={true} className="primary sm">
+                Core Capabilities
+              </AnimatedCopy>
+              <AnimatedCopy tag="h2" animateOnScroll={true} delay={0.25}>
+                Skills
+              </AnimatedCopy>
+              <AnimatedCopy
+                tag="p"
+                animateOnScroll={true}
+                className="secondary"
+                delay={0.5}
+              >
+                Tools and strengths pulled from the resume — grouped for clarity.
+              </AnimatedCopy>
             </div>
-          </div>
-        </section>
+
+            <div className="skills-groups">
+              {SKILL_CATEGORY_LABELS.map((cat) => {
+                const group = skills.filter((s) => (s.category || "technical") === cat.id);
+                if (!group.length) return null;
+                return (
+                  <div className="skills-group" key={cat.id}>
+                    <p className="primary sm skills-group-label">{cat.label}</p>
+                    <div className="skills-pills">
+                      {group.map((skill) => (
+                        <span className="skill-pill" key={skill.id || skill.name}>
+                          {skill.name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
 
         <ContactForm />
 

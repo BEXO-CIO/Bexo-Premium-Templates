@@ -173,6 +173,26 @@ export function normalizeProfile(raw) {
     ...normalizeAssets(entry),
   }));
 
+  const skillCategorySet = new Set(["technical", "tools", "soft", "languages"]);
+  const skillEntries = asArray(
+    raw.skillEntries?.length ? raw.skillEntries : sections.skills?.entries,
+  )
+    .map((entry, index) => {
+      if (typeof entry === "string") {
+        const name = entry.trim();
+        return name ? { id: String(index + 1), name, category: "technical" } : null;
+      }
+      const name = asString(pick(entry, ["name", "title", "skill", "label"]));
+      if (!name) return null;
+      const categoryRaw = asString(entry.category, "technical").toLowerCase();
+      return {
+        id: asString(entry.id, String(index + 1)),
+        name,
+        category: skillCategorySet.has(categoryRaw) ? categoryRaw : "technical",
+      };
+    })
+    .filter(Boolean);
+
   const socials = normalizeLinks(contactRaw);
   const email = asString(contactRaw.email) || asString(raw.user?.email);
   // Never expose phone on the public portfolio surface
@@ -211,6 +231,7 @@ export function normalizeProfile(raw) {
     certificateEntries,
     achievementEntries,
     researchEntries,
+    skillEntries,
     contactData,
     sections: {
       about: { reviewed: true, entries: aboutEntries },
@@ -220,6 +241,7 @@ export function normalizeProfile(raw) {
       certificates: { reviewed: true, entries: certificateEntries },
       achievements: { reviewed: true, entries: achievementEntries },
       research: { reviewed: true, entries: researchEntries },
+      skills: { reviewed: true, entries: skillEntries },
       contact: { reviewed: true, entries: [{ email, socials, address: asString(contactRaw.address) }] },
     },
   };
@@ -324,6 +346,12 @@ const defaultProfile = normalizeProfile({
       year: "2023",
       link: "https://smashingmagazine.com",
     },
+  ],
+  skillEntries: [
+    { name: "React", category: "technical" },
+    { name: "GSAP", category: "technical" },
+    { name: "Framer Motion", category: "tools" },
+    { name: "Figma", category: "tools" },
   ],
   contactData: {
     email: "hello@curafuturi.com",

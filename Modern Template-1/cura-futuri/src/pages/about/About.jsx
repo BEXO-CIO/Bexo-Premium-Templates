@@ -17,6 +17,14 @@ const About = () => {
   const education = sections?.education?.entries || [];
   const certificates = sections?.certificates?.entries || [];
   const experience = sections?.experience?.entries || [];
+  const skills = sections?.skills?.entries || [];
+
+  const SKILL_CATEGORY_LABELS = [
+    { id: "technical", label: "Technical" },
+    { id: "tools", label: "Tools" },
+    { id: "soft", label: "Soft" },
+    { id: "languages", label: "Languages" },
+  ];
 
   const data = {
     title: "",
@@ -290,6 +298,40 @@ const About = () => {
                 </div>
               </div>
             ))}
+          </section>
+        )}
+
+        {skills.length > 0 && (
+          <section className="about-awards in-press about-skills">
+            <div className="about-row">
+              <div className="about-col"></div>
+              <div className="about-col award-header">
+                <p>
+                  <span>Skills</span>
+                </p>
+              </div>
+            </div>
+            <div className="about-row">
+              <div className="about-col"></div>
+              <div className="about-col skills-groups">
+                {SKILL_CATEGORY_LABELS.map((cat) => {
+                  const group = skills.filter((s) => (s.category || "technical") === cat.id);
+                  if (!group.length) return null;
+                  return (
+                    <div className="skills-group" key={cat.id}>
+                      <p className="skills-group-label">{cat.label}</p>
+                      <div className="skills-pills">
+                        {group.map((skill) => (
+                          <span className="skill-pill" key={skill.id || skill.name}>
+                            {skill.name}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </section>
         )}
 

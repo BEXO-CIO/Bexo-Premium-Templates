@@ -254,7 +254,8 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  padding: 5em 2em 4em;
+  /* Bottom beat: after the last card passes, the name stands alone again */
+  padding: 5em 2em 36vh;
   /* allow sticky watermark; do not clip it mid-scroll */
   overflow: visible;
 }
@@ -279,16 +280,36 @@
 .home-work-watermark-text {
   display: block;
   width: max-content;
-  max-width: none;
+  max-width: 100%;
+  /* max-content blocks ignore text-align: center — center via auto margins */
+  margin-inline: auto;
   white-space: nowrap;
+  will-change: opacity, transform;
+  transform: scale(1.02);
+  transition:
+    opacity 0.9s cubic-bezier(0.33, 1, 0.68, 1),
+    transform 0.9s cubic-bezier(0.33, 1, 0.68, 1);
   font-family: "Rader", sans-serif;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: -0.03em;
   line-height: 0.9;
   color: var(--fg);
-  opacity: 0.12;
+  /* Primary voice by default; JS toggles .is-subtle while cards pass over */
+  opacity: 1;
   font-size: clamp(2.8rem, 11vw, 8.5rem);
+}
+
+.home-work-watermark-text.is-subtle {
+  opacity: 0.09;
+  transform: scale(0.965);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-work-watermark-text {
+    transition: none;
+    transform: none;
+  }
 }
 
 .home-work.name-fit--solo-lg .home-work-watermark-text,
@@ -306,11 +327,13 @@
 .home-work-foreground {
   position: relative;
   z-index: 1;
+  /* Opening beat: the name owns the stage before the first card arrives */
+  margin-top: 52vh;
 }
 
 .home-work-kicker {
   text-align: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 0;
   opacity: 0.55;
 }
 
@@ -431,11 +454,15 @@
   }
 
   .home-work {
-    padding: 4.5em 1.25em 3em;
+    padding: 4.5em 1.25em 30vh;
   }
 
   .home-work-watermark {
     top: 38vh;
+  }
+
+  .home-work-foreground {
+    margin-top: 46vh;
   }
 
   .home-work-watermark-text {

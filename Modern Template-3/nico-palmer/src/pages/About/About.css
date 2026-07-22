@@ -172,6 +172,35 @@
   gap: 2em;
 }
 
+.skills-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  width: 100%;
+}
+
+.skills-group-label {
+  margin-bottom: 0.75em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.skills-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55em 1em;
+  border: 1px dashed var(--fg);
+  border-radius: 999px;
+  font-size: 0.95em;
+  line-height: 1.2;
+}
+
 .fav-tool {
   position: relative;
   flex: 1;

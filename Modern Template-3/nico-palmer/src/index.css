@@ -22,7 +22,11 @@ body {
   color: var(--fg);
   width: 100%;
   max-width: 100%;
+  /* clip (not hidden): hidden makes body a scroll container, which silently
+     disables every position: sticky descendant (e.g. the work watermark).
+     hidden first as a fallback for engines without clip support. */
   overflow-x: hidden;
+  overflow-x: clip;
   min-height: 100dvh;
 }
 
@@ -30,6 +34,7 @@ html {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img {

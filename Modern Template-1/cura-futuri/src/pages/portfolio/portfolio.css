@@ -424,6 +424,30 @@
   margin-top: 1.1rem;
 }
 
+.portfolio-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.portfolio-skills-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.portfolio-skills-label {
+  margin: 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.portfolio-skills .portfolio-tags {
+  margin-top: 0;
+}
+
 .portfolio-tags span {
   font-family: "Inter", sans-serif;
   font-size: 0.68rem;
