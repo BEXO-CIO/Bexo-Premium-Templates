@@ -262,7 +262,7 @@
 
 .home-work-watermark {
   position: sticky;
-  top: 42vh;
+  top: 28vh;
   z-index: 0;
   height: 0;
   display: flex;
@@ -327,8 +327,8 @@
 .home-work-foreground {
   position: relative;
   z-index: 1;
-  /* Opening beat: the name owns the stage before the first card arrives */
-  margin-top: 52vh;
+  /* Opening beat: name sits clearly above the first card */
+  margin-top: 68vh;
 }
 
 .home-work-kicker {
@@ -458,11 +458,11 @@
   }
 
   .home-work-watermark {
-    top: 38vh;
+    top: 24vh;
   }
 
   .home-work-foreground {
-    margin-top: 46vh;
+    margin-top: 58vh;
   }
 
   .home-work-watermark-text {

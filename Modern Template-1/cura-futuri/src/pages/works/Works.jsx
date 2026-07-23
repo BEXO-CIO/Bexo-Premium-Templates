@@ -114,7 +114,7 @@ const Works = () => {
                         {imageUrl && (
                           <div className="project-img">
                             <Link to={`/projects/${project.id}`}>
-                              <img src={imageUrl} alt={project.title} />
+                              <img src={imageUrl} alt={project.title} loading="lazy" decoding="async" />
                             </Link>
                           </div>
                         )}
@@ -136,7 +136,7 @@ const Works = () => {
                         {imageUrl && (
                           <div className="project-img">
                             <Link to={`/projects/${project.id}`}>
-                              <img src={imageUrl} alt={project.title} />
+                              <img src={imageUrl} alt={project.title} loading="lazy" decoding="async" />
                             </Link>
                           </div>
                         )}

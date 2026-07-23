@@ -237,7 +237,7 @@ const Home = () => {
           <div className="hero-portrait" aria-hidden={!photoUrl}>
             {photoUrl ? (
               <div className="hero-portrait-frame">
-                <img src={photoUrl} alt={user?.name || ""} />
+                <img src={photoUrl} alt={user?.name || ""} decoding="async" />
               </div>
             ) : (
               <div className="hero-portrait-frame hero-portrait-frame--fallback">
